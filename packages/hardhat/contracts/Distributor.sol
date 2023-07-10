@@ -1,28 +1,28 @@
 //SPDX-License-Identifier: MIT
-/**                                                                                                         ..                                  
-                            ,*.                                   
-                          .**,                                    
-                          ,***.                                    
-                    .,.   ,***,                                    
-                  .**,    *****.                                   
-                .****.    ,*****,                                  
-              .******,     ,******,                                
-            .*******.       .********,              .              
-          ,******.            .*************,,*****.               
-        ,*****.        ,,.        ,************,.                  
-    .,****.         ,*****,                                       
-    ,***,          ,*******,.              ..                      
-  ,**,          .*******,.       ,********.                        
-              .******,.       .********,                           
-            .*****,         .*******,                              
-          ,****,          .******,                                 
-        ,***,.          .*****,                                    
-      ,**,.           ./***,                                       
-    ,,             .***,                                          
-                  .**,                 
+/**                                                                                                         ..
+                            ,*.
+                          .**,
+                          ,***.
+                    .,.   ,***,
+                  .**,    *****.
+                .****.    ,*****,
+              .******,     ,******,
+            .*******.       .********,              .
+          ,******.            .*************,,*****.
+        ,*****.        ,,.        ,************,.
+    .,****.         ,*****,
+    ,***,          ,*******,.              ..
+  ,**,          .*******,.       ,********.
+              .******,.       .********,
+            .*****,         .*******,
+          ,****,          .******,
+        ,***,.          .*****,
+      ,**,.           ./***,
+    ,,             .***,
+                  .**,
 
                     Moonshot Collective
-            https://github.com/moonshotcollective 
+            https://github.com/moonshotcollective
 */
 pragma solidity >=0.8.0;
 
@@ -33,7 +33,7 @@ contract Distributor {
   using SafeTransferLib for ERC20;
 
   event ethDistributed(address indexed sender, string indexed id);
-  event tokenDistributed(address indexed sender, address indexed token, string indexed id);
+  event tokenDistributed(address indexed sender, address indexed token, string indexed id, uint256 amount);
 
   function distributeEther(
     address[] memory recipients,
@@ -80,12 +80,12 @@ contract Distributor {
       token.safeTransferFrom(msg.sender, recipients[i], values[i]);
     }
 
-    emit tokenDistributed(msg.sender, address(token), id);
+    emit tokenDistributed(msg.sender, address(token), id, total);
   }
 }
 
-/* 
-  Implementation Resources: 
+/*
+  Implementation Resources:
     https://github.com/banteg/disperse-research
     https://github.com/Rari-Capital/solmate
 */
